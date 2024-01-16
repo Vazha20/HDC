@@ -1,0 +1,61 @@
+.nav-link{
+    list-style: none;
+    font-family:Georgia, 'Times New Roman', Times, serif; 
+    gap: 60px;
+}
+
+.nav-link a{
+    font-size: larger;
+    font-weight: bold;     
+}
+.nav-link a:hover{
+    color: black;
+}
+.nav-padding{
+    padding: 20px 12px 8px;
+}
+.nav-color {
+    background-color: #00b0ff;
+    color: white;    
+}
+.btn-primary{
+    padding: 20px;
+    border-radius: 30px;
+    background-color: #00b0ff;
+    color: white;
+    border-style: none;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    
+}
+.btn-primary:hover {
+    background-color: #32beff;
+}
+.text-decoration a{
+    text-decoration: none;
+}
+.white a{
+    color: white;
+}
+.text-font{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+.gap-social{
+    gap: 40px;
+}
+.carousel-item img{
+    width: 100%;
+    height: 600px;
+    
+}
+.bg{
+    background-color: white;
+    
+}
+.bgg{
+    width: 40%;
+   
+    justify-content: center;
+    
+}
