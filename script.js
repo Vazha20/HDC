@@ -1,8 +1,10 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const burgerMenu = document.querySelector(".burger-menu");
-    const navLink = document.querySelector(".nav-link");
 
-    burgerMenu.addEventListener("click", function () {
-        navLink.classList.toggle("show");
+    document.addEventListener('DOMContentLoaded', function () {
+        const burgerMenuBtn = document.querySelector('.burger-menu-btn');
+        const burgerSidebar = document.querySelector('.burger-sidebar');
+
+        burgerMenuBtn.addEventListener('click', function () {
+            burgerSidebar.style.display = (burgerSidebar.style.display === 'block') ? 'none' : 'block';
+        });
     });
-});
+

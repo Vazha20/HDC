@@ -1,7 +1,7 @@
 .nav-link{
     list-style: none;
     font-family:Georgia, 'Times New Roman', Times, serif; 
-    gap: 60px;
+    gap: 40px;
 }
 
 .nav-link a{
@@ -28,6 +28,7 @@
     border-style: none;
     font-family:Georgia, 'Times New Roman', Times, serif;
     font-weight: bold;
+   
     
 }
 .btn-primary:hover {
@@ -70,7 +71,7 @@ p{
     padding: 40px 40px 40px 40px;
 }
 .btn-secendory{
-    padding: 10px 160px;
+    padding: 10px 40px;
     border-radius: 10px;
     background-color: #00b0ff;
     color: white;
@@ -101,44 +102,24 @@ p{
     background-color: #000;
     margin: 6px 0;
 }
-@media only screen and (max-width: 768px) {
-    .gap-social,
-    .text-decoration {
+
+.response-only {
+    display: none;
+}
+
+.desktop-only {
+    display: block;
+}
+
+@media only screen and (max-width: 993px) {
+    .desktop-only {
         display: none;
     }
 
-    .burger-menu {
+    .response-only {
         display: block;
     }
-
-    .nav-link {
-        flex-direction: column;
-        align-items: center;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background-color: #333;
-        z-index: 1;
-        display: none;
-    }
-
-    .nav-link.show {
-        display: flex;
-    }
-
-    .nav-link li {
-        padding: 15px;
-        text-align: end;
-        width: 100%;
-    }
-    .btn-secendory{
-        padding: 10px 70px;
-        border-radius: 10px;
-        background-color: #00b0ff;
-        color: white;
-        border-style: none;
-        font-family:Georgia, 'Times New Roman', Times, serif;
-        font-weight: bold;
-    }
 }
+
+
+
