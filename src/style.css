@@ -145,3 +145,17 @@ p{
 .fontforName{
     font-size: xx-large;
 }
+.ff{
+    width: 1000px;
+    background-color: 1px solid black;
+    height: 1px;
+}
+.inputSize{
+    padding: 0px 10px;
+    border-radius: 10px;
+    border-style: none;
+    width: 280px;
+}
+.gapGetnews{
+    gap: 200px;
+}
