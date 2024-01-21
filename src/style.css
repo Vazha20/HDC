@@ -170,3 +170,20 @@ p{
     
     height: 200px;
 }
+.ssss{
+    width: 200px;
+    height: 100px;
+    background-color: #261e1e;
+    border-radius: 20px;
+
+}
+.gbgb{
+    
+background: rgba(0, 176, 255, 0.54);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(0px);
+-webkit-backdrop-filter: blur(0px);
+width: 220px;
+height: 100px;
+}
