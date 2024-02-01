@@ -1,6 +1,8 @@
+// login.js
+
 // Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -17,24 +19,72 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app); // Pass the app instance to getAuth
 
-// Login function
-function login() {
-  const email = document.getElementById('loginEmail').value;
-  const password = document.getElementById('loginPassword').value;
-
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then(function (userCredential) {
-      const user = userCredential.user;
-      alert('Login successful! User ID: ' + user.uid);
-    })
-    .catch(function (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(`Error: ${errorCode} - ${errorMessage}`);
-    });
+// Validate email function
+function validate_email(email) {
+    // Implement your email validation logic
+    return email && email.includes('@'); // Example validation
 }
 
+// Validate password function
+function validate_password(password) {
+    // Implement your password validation logic
+    return password && password.length >= 6; // Example validation
+}
 
-// Event listener for the login button
-document.getElementById('loginButton').addEventListener('click', login);
+// Event listener for the login form
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('loginForm').addEventListener('submit', signIn);
+
+    // Add event listener for the "Forgot Password" link
+    document.getElementById('forgotPasswordLink').addEventListener('click', forgotPassword);
+});
+
+function signIn(event) {
+    event.preventDefault(); // Prevent form submission
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    // Validate email and password
+    if (!validate_email(email) || !validate_password(password)) {
+        alert('Invalid email or password format.');
+        return;
+    }
+
+    signInWithEmailAndPassword(auth, email, password)
+        .then(function (userCredential) {
+            const user = userCredential.user;
+
+            // Redirect to the user cabinet page
+            window.location.href = 'user-cabinet.html?uid=' + user.uid;
+
+            alert('User signed in successfully.');
+        })
+        .catch(function (error) {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(`Error: ${errorCode} - ${errorMessage}`);
+        });
+}
+
+function forgotPassword() {
+    const email = prompt('Enter your email address:');
+
+    // Validate email
+    if (!validate_email(email)) {
+        alert('Invalid email format.');
+        return;
+    }
+
+    // Send a password reset email
+    sendPasswordResetEmail(auth, email)
+        .then(function () {
+            alert('Password reset email sent. Please check your inbox.');
+        })
+        .catch(function (error) {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(`Error: ${errorCode} - ${errorMessage}`);
+        });
+}
+  

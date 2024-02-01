@@ -30,30 +30,31 @@ function register() {
   }
 
   createUserWithEmailAndPassword(auth, email, password)
-    .then(function (userCredential) {
+    .then(async function (userCredential) {
       const user = userCredential.user;
       const databaseRef = ref(database);
 
       const user_data = {
         name: name,
         surname: surname,
-        email: email,
+        email: Email,
         password: password,
         confirmPassword: confirmPassword,
         last_login: new Date().toISOString(),
       };
 
-      set(ref(database, 'users/' + user.uid), user_data);
+      await set(ref(database, 'users/' + user.uid), user_data);
 
       // Export user data
       exportUserData(user_data);
 
       // Redirect to the user cabinet page
-      window.location.href = 'user-cabinet.html';
+      window.location.href = 'user-cabinet.html?uid=' + user.uid;
 
       alert('User created successfully.');
     })
     .catch(function (error) {
+      console.error('Error creating user:', error);
       const errorCode = error.code;
       const errorMessage = error.message;
       alert(`Error: ${errorCode} - ${errorMessage}`);
@@ -66,8 +67,16 @@ function validate_email(email) {
 }
 
 function validate_password(password) {
-  return password.length >= 6;
+  // Check if the password length is greater than or equal to 6
+  const lengthValid = password.length >= 6;
+
+  // Check if the password contains at least one uppercase letter
+  const uppercaseValid = /[A-Z]/.test(password);
+
+  // Return true if both conditions are met
+  return lengthValid && uppercaseValid;
 }
+
 
 // Export user data function
 function exportUserData(userData) {

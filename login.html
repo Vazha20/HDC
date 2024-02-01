@@ -118,25 +118,33 @@
 
 <div class="container mt-auth">
   <div class="authform" id="loginForm">
-   <form>
-      <div class="text-center">
-      <p>ავტორიზაცია</p>
+   
+    <form id="loginForm">
+      <div>
+        <div class="text-center">
+        <p>ავტორიზაცია</p>
+        
       </div>
       <div class="text-center">
         <img width="120px" src="./src/img/IMG_4271.jpg">
       </div>
-      <div class="mt-3">
-        <input type="email" placeholder="email" id="loginEmail" class="form-control" />
-        <input type="password" id="loginPassword" placeholder="პაროლი" class="form-control mt-3" />
+      <div class="text-center mt-3">
+      <input class="form-control" type="text" id="email" placeholder="Email">
       </div>
       <div class="text-center mt-3">
-        <button type="button" class="btn-secendory" id="loginButton">შესვლა</button>
-      </div>
+      <input class="form-control" type="password" id="password" placeholder="პაროლი">
+    </div>
       <div class="text-center mt-3">
-        <a href="./register.html"><p>რეგისტრაცია</p></a>
-        <p>დაგავიწყდათ პაროლი?</p>
+      <button class="btn-secendory" type="submit" id="loginButton">შესვლა</button>
+      <a href="./register.html"><p class="mt-3">რეგისტრაცია</p></a>
+      <a href="#" id="forgotPasswordLink">Forgot Password?</a>
+      
       </div>
-    </form>
+    </div>
+  </div>
+  
+  </form> 
+
   </div>
 </div>
 
