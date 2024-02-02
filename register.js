@@ -37,7 +37,7 @@ function register() {
       const user_data = {
         name: name,
         surname: surname,
-        email: Email,
+        email: email,
         password: password,
         confirmPassword: confirmPassword,
         last_login: new Date().toISOString(),
