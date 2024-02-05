@@ -1,114 +1,48 @@
-// Import Firebase modules
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js';
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js';
-import { getFirestore, collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
+import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-storage.js';
 
-// Initialize Firebase with your project config
 const firebaseConfig = {
-  // Your Firebase config here
+  apiKey: "AIzaSyByvcMwXGwxvbhoW6Ys6ip0udq1ZuM1bpA",
+  authDomain: "hdc-project111.firebaseapp.com",
+  projectId: "hdc-project111",
+  storageBucket: "hdc-project111.appspot.com",
+  messagingSenderId: "1031505541323",
+  appId: "1:1031505541323:web:5abcd1ae3ff98c62f7834e",
+  measurementId: "G-93VP5RG2GP"
 };
 
+// Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 
-// Get references to authentication and firestore
-const auth = getAuth(firebaseApp);
+// Initialize Firestore and Storage
 const db = getFirestore(firebaseApp);
+const storage = getStorage(firebaseApp);
 
-// Authentication state change listener
-onAuthStateChanged(auth, user => {
-  const authSection = document.getElementById('auth-section');
-  const newsSection = document.getElementById('news-section');
+document.getElementById('newsForm').addEventListener('submit', async function (event) {
+  event.preventDefault();
 
-  if (user) {
-    authSection.innerHTML = `<h2>Welcome, ${user.email}!</h2>`;
-    authSection.innerHTML += '<button onclick="signOut()">Sign Out</button>';
-    newsSection.style.display = 'block';
-    displayNewsFeed();
-  } else {
-    authSection.innerHTML = '<h2>Authentication</h2>';
-    authSection.innerHTML += '<button onclick="signIn()">Sign In</button>';
-    newsSection.style.display = 'none';
+  const title = document.getElementById('title').value;
+  const content = document.getElementById('content').value;
+  const imageFile = document.getElementById('image').files[0];
+
+  try {
+    // Upload image to Firebase Storage
+    const imageRef = ref(storage, `images/${imageFile.name}`);
+    await uploadBytes(imageRef, imageFile);
+    const imageUrl = await getDownloadURL(imageRef);
+
+    // Add news data to Firestore
+    await addDoc(collection(db, 'news'), {
+      title: title,
+      content: content,
+      imageUrl: imageUrl,
+      timestamp: serverTimestamp()
+    });
+
+    // Clear the form after submission
+    document.getElementById('newsForm').reset();
+  } catch (error) {
+    console.error("Error adding news:", error);
   }
 });
-
-// Sign In function
-function signIn() {
-  const email = prompt('Enter your email:');
-  const password = prompt('Enter your password:');
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      console.log('User signed in:', auth.currentUser.email);
-    })
-    .catch(error => {
-      console.error('Sign in error:', error.message);
-    });
-}
-
-// Sign Out function
-function signOutUser() {
-  signOut(auth)
-    .then(() => {
-      console.log('User signed out.');
-    })
-    .catch(error => {
-      console.error('Sign out error:', error.message);
-    });
-}
-
-// Add News function
-function addNews() {
-  const title = document.getElementById('title').value;
-  const photoUrl = document.getElementById('photoUrl').value;
-  const text = document.getElementById('text').value;
-
-  const user = auth.currentUser;
-
-  if (user) {
-    // Create a new document in the 'news' collection
-    addDoc(collection(db, 'news'), {
-      title: title,
-      photoUrl: photoUrl,
-      text: text,
-      author: user.uid,
-      date: new Date()
-    })
-    .then(() => {
-      console.log('News article added.');
-      displayNewsFeed();
-    })
-    .catch(error => {
-      console.error('Error adding news article:', error);
-    });
-  } else {
-    console.error('User not authenticated.');
-  }
-}
-
-// Display News Feed function
-function displayNewsFeed() {
-  const newsFeed = document.getElementById('news-feed');
-
-  // Clear previous entries
-  newsFeed.innerHTML = '';
-
-  // Get news articles from Firestore
-  getDocs(collection(db, 'news'))
-    .then(querySnapshot => {
-      querySnapshot.forEach(doc => {
-        const data = doc.data();
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-          <strong>${data.title}</strong><br>
-          <img src="${data.photoUrl}" alt="News Image" style="max-width: 300px;"><br>
-          ${data.text}<br>
-          <em>Author: ${data.author}</em><br>
-          <em>Date: ${data.date.toLocaleString()}</em>
-        `;
-        newsFeed.appendChild(listItem);
-      });
-    })
-    .catch(error => {
-      console.error('Error getting news articles:', error);
-    });
-}
