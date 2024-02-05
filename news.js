@@ -1,7 +1,11 @@
+// Import Firebase modules
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js';
-import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
+import { getFirestore, collection, addDoc, serverTimestamp, getDocs } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-storage.js';
+import { getAuth } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js';
+// news.js
 
+// Firebase project configuration
 const firebaseConfig = {
   apiKey: "AIzaSyByvcMwXGwxvbhoW6Ys6ip0udq1ZuM1bpA",
   authDomain: "hdc-project111.firebaseapp.com",
@@ -14,35 +18,74 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
-
-// Initialize Firestore and Storage
 const db = getFirestore(firebaseApp);
 const storage = getStorage(firebaseApp);
+const auth = getAuth(firebaseApp);
 
-document.getElementById('newsForm').addEventListener('submit', async function (event) {
-  event.preventDefault();
 
-  const title = document.getElementById('title').value;
-  const content = document.getElementById('content').value;
-  const imageFile = document.getElementById('image').files[0];
+document.addEventListener('DOMContentLoaded', async function () {
+  // Reference to the news container
+  const newsContainer = document.getElementById('newsContainer');
+
+  // Event listener for form submission
+  document.getElementById('newsForm').addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const title = document.getElementById('title').value;
+      const text = document.getElementById('text').value;
+      const imageFile = document.getElementById('image').files[0];
+
+      try {
+          // Upload image to Firebase Storage
+          const imageRef = ref(storage, `images/${imageFile.name}`);
+          await uploadBytes(imageRef, imageFile);
+          const imageUrl = await getDownloadURL(imageRef);
+
+          // Add news data to Firestore
+          await addDoc(collection(db, 'news'), {
+              title: title,
+              text: text,
+              imageUrl: imageUrl,
+              timestamp: serverTimestamp()
+          });
+
+          // Clear the form after submission
+          document.getElementById('newsForm').reset();
+      } catch (error) {
+          console.error("Error adding news:", error);
+      }
+  });
 
   try {
-    // Upload image to Firebase Storage
-    const imageRef = ref(storage, `images/${imageFile.name}`);
-    await uploadBytes(imageRef, imageFile);
-    const imageUrl = await getDownloadURL(imageRef);
+      // Fetch news data from Firestore
+      const newsCollection = collection(db, 'news');
+      const newsSnapshot = await getDocs(newsCollection);
+      const newsList = newsSnapshot.docs.map(doc => doc.data());
 
-    // Add news data to Firestore
-    await addDoc(collection(db, 'news'), {
-      title: title,
-      content: content,
-      imageUrl: imageUrl,
-      timestamp: serverTimestamp()
-    });
-
-    // Clear the form after submission
-    document.getElementById('newsForm').reset();
+      // Display news in the HTML
+      newsList.forEach(news => {
+          const newsCard = createNewsCard(news);
+          newsContainer.appendChild(newsCard);
+      });
   } catch (error) {
-    console.error("Error adding news:", error);
+      console.error("Error fetching news:", error);
   }
 });
+
+// Function to create a news card element
+function createNewsCard(news) {
+  const newsCard = document.createElement('div');
+  newsCard.classList.add('news-card');
+
+  // Add news details to the card
+  newsCard.innerHTML = `
+  <div class="container">
+      <h2>${news.title}</h2>
+      <p>${news.text}</p>
+      <img width="200px" src="${news.imageUrl}" alt="News Image">
+      <p>Timestamp: ${new Date(news.timestamp.toMillis()).toLocaleString()}</p>
+      </div>
+  `;
+
+  return newsCard;
+}

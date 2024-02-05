@@ -17,7 +17,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app); // Pass the app instance to getAuth
+    const auth = getAuth(app); // Pass the app instance to getAuth
 
 // Validate email function
 function validate_email(email) {
