@@ -2,7 +2,7 @@
 
 // Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -17,7 +17,16 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app); // Pass the app instance to getAuth
+const auth = getAuth(app); // Pass the app instance to getAuth
+
+// Check if the user is already authenticated
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        // User is signed in, redirect to user cabinet page
+        window.location.href = 'user-cabinet.html?uid=' + user.uid;
+    }
+    
+});
 
 // Validate email function
 function validate_email(email) {
@@ -87,4 +96,3 @@ function forgotPassword() {
             alert(`Error: ${errorCode} - ${errorMessage}`);
         });
 }
-  
