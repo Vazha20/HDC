@@ -80,12 +80,18 @@ function createNewsCard(news) {
   // Add news details to the card
   newsCard.innerHTML = `
   <div class="container">
+  
       <h2>${news.title}</h2>
-      <p>${news.text}</p>
-      <img width="200px" src="${news.imageUrl}" alt="News Image">
       <p>Timestamp: ${new Date(news.timestamp.toMillis()).toLocaleString()}</p>
+      
+      <img width="200px" src="${news.imageUrl}" alt="News Image">
+      <p>${news.text}</p>
+ 
       </div>
+      
   `;
+
 
   return newsCard;
 }
+
