@@ -22,7 +22,7 @@ const auth = getAuth(app); // Pass the app instance to getAuth
 // Check if the user is already authenticated
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        // User is signed in, redirect to user cabinet page
+        // i want loading here
         window.location.href = 'user-cabinet.html?uid=' + user.uid;
     }
     
