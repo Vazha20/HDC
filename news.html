@@ -115,28 +115,25 @@
 </div>
 
 
-<div id="newsContainer">
+<div id="newsContainer" class="container d-flex flex-wrap justify-content-between mt-5">
   <!-- News will be dynamically added here -->
 </div>
 
 
 
-<form class="container" id="newsForm">
-  <label for="title">Title:</label>
-  <input type="text" id="title" name="title" required>
-  
-  <label for="content">text:</label>
-  <textarea id="text" name="text" required></textarea>
-  
-  <label for="image">Image:</label>
-  <input type="file" id="image" name="image" accept="image/*" required>
 
-  <button type="submit">Submit</button>
+<form id="newsForm" class="container">
+  <input type="text" id="title" placeholder="სათაური"><br>
+  <textarea class="textArea" id="text" width="500px" placeholder="ტექსტი"></textarea><br>
+  <input type="file" id="image"><br>
+  <button class="btn-secendory" type="submit">დამატება</button>
 </form>
 
-    <hr class="container ff">
+<div style="background-color: rgb(235, 234, 234); height: 440px;"> 
 
-    <div class="container mt-5">
+    
+
+    <div class="container pt-5">
       <div class="d-flex align-items-start">
         <div class="col-4 row">
           <h5>ვიზიტზე ჩაწერა</h5>
@@ -182,6 +179,8 @@
     </div>
   
   </div>
+  </div>
+  
   
   
 
