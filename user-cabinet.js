@@ -46,8 +46,8 @@ function displayUserInfo(userData) {
   if (userData && userData.name && userData.surname && userData.email && userData.last_login) {
     // User data is available
     userInfoDiv.innerHTML = `
-      <p><strong>Name:</strong> ${userData.name}</p>
-      <p><strong>Surname:</strong> ${userData.surname}</p>
+      <p><strong>სახელი:</strong> ${userData.name}</p>
+      <p><strong>გვარი:</strong> ${userData.surname}</p>
       <p><strong>Email:</strong> ${userData.email}</p>
       
     `;

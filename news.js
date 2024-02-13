@@ -130,7 +130,7 @@ function createNewsCard(news) {
   newsCard.innerHTML = `
    <div>
       <h2 class="mt-5">${news.title}</h2>
-      <p>Timestamp: ${new Date(news.timestamp.toMillis()).toLocaleString()}</p>
+      <p>თარიღი: ${new Date(news.timestamp.toMillis()).toLocaleString()}</p>
       <img width="350px" src="${news.imageUrl}" alt="News Image" class="lazy" data-src="${news.imageUrl}">
       <p>${news.text}</p>
       </div>
