@@ -138,3 +138,29 @@ function createNewsCard(news) {
 
   return newsCard;
 }
+
+
+function loadNews() {
+  // Simulate loading delay
+  setTimeout(function () {
+    var newsContainer = document.getElementById("newsContainer");
+    // Example: dynamically adding news items
+    for (var i = 0; i < 5; i++) {
+      var newsItem = document.createElement("div");
+      newsItem.innerHTML = "<p>News item " + (i + 1) + "</p>";
+      newsContainer.appendChild(newsItem);
+    }
+    // Hide loading icon after news are loaded
+    document.getElementById("loadingIcon").style.display = "none";
+    // Show news container
+    newsContainer.style.display = "block";
+
+    // Simulate reload after a delay
+    setTimeout(loadNews, 5000); // Reload after 5 seconds
+  }, 2000); // Simulated delay of 2 seconds
+}
+
+// Call the loadNews function when the page loads
+window.onload = function () {
+  loadNews();
+};
