@@ -6,14 +6,14 @@ import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, sendPasswordRe
 
 // Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyByvcMwXGwxvbhoW6Ys6ip0udq1ZuM1bpA",
-    authDomain: "hdc-project111.firebaseapp.com",
-    projectId: "hdc-project111",
-    storageBucket: "hdc-project111.appspot.com",
-    messagingSenderId: "1031505541323",
-    appId: "1:1031505541323:web:5abcd1ae3ff98c62f7834e",
-    measurementId: "G-93VP5RG2GP"
-};
+    apiKey: "AIzaSyBwRlbzwHclIcvK_aLmFKrrtH8yfJahzDU",
+    authDomain: "hdcenter00.firebaseapp.com",
+    projectId: "hdcenter00",
+    storageBucket: "hdcenter00.appspot.com",
+    messagingSenderId: "737981264374",
+    appId: "1:737981264374:web:d831dd29e0a0005762d7d7",
+    measurementId: "G-VS1M2025KW"
+  };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
