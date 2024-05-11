@@ -105,10 +105,14 @@ p{
     .desktop-only {
         display: none;
     }
-
+    
     .response-only {
         display: block;
     }
+   
+        .carousel-item img {
+          height: 400px;
+        }
 }
 .mt-auth{
     margin-top: 80px;
@@ -197,4 +201,8 @@ font-size: x-large;
   .textArea{
     width: 500px;
     height: 100px;
+}
+
+.margin-top{
+    margin-top: 100px;
 }
