@@ -136,12 +136,21 @@
     </button>
   </div>
 
-  <section>
-    <div class="container d-flex justify-content-between p-5 text-center">
+  <section class="desktop-only">
+    <div class=" container d-flex justify-content-between p-5 text-center flex-wrap">
       
       <a class="gbgb">სერვისები</a>
       <a href="./personal.html" class="gbgb">პერსონალი</a>
       <a class="gbgb">რჩევები</a>
+    </div>
+  </section>
+
+  <section class="response-only">
+    <div class=" container d-flex justify-content-center gap-3 p-5 text-center flex-wrap">
+      
+      <a class="gbgb mt-3">სერვისები</a>
+      <a href="./personal.html" class="gbgb mt-3">პერსონალი</a>
+      <a class="gbgb mt-3">რჩევები</a>
     </div>
   </section>
 
@@ -161,6 +170,7 @@
 
     <hr class="container ff">
 
+    <section class="desktop-only">
     <div class="container mt-5">
       <div class="d-flex align-items-start">
         <div class="col-4 row">
@@ -188,10 +198,34 @@
       
     </div>
     </div>
+  </section>
+
+
+  <section class="response-only">
+    <div class="container mt-5">
+      <div class="flex-wrap align-items-start">
+        <div class="col-9">
+          <h5>ვიზიტზე ჩაწერა</h5>
+          <p class="mt-3">თქვენ შეგიძლიათ დაჯავშნოთ ექიმთან ვიზიტი სახლიდან გაუსვლელად</p>
+        </div>
+        <div class="col-9">
+          <input type="email" placeholder="სახელი" id="loginName" class="form-control mt-3" />
+          <input type="email" placeholder="გვარი" id="loginName" class="form-control mt-3" />
+          <input type="email" placeholder="ელ.ფოსტა" id="loginName" class="form-control mt-3" />
+          <input type="email" placeholder="საკონტაკტო ნომერი" id="loginName" class="form-control mt-3" />
+          
+            <button type="button" class="btn-secendory mt-3">ჩაწერა</button>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+    
     
   
     <hr class="container ff mt-5">
   
+    <section class="desktop-only">
     <div class="container mt-5">
       <div class="d-flex align-items-start">
         <div class="col-4">
@@ -205,7 +239,30 @@
         </div>
       </div>
     </div>
+  </section>
+
+
+  <section class="response-only">
+    <div class="container mt-5 justify-content-center">
+      <div class="flex-wrap align-items-start">
+        <div class="col-9">
+          <h5>სიახლეების გამოწერა</h5>
+          <p class="mt-3">გამოიწერეთ სიახლეები, მხოლოდ ელ.ფოსტის<br>შეყვანით. </p>
+        </div>
   
+        <div class="col-9">
+          <input type="email" placeholder="ელ.ფოსტა" id="loginName" class="form-control" />
+          
+            <button type="button" class="btn-secendory mt-3">გამოწერა</button>
+       
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+    
  
   
   
