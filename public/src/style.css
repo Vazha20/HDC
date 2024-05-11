@@ -206,3 +206,7 @@ font-size: x-large;
 .margin-top{
     margin-top: 100px;
 }
+.loading{
+    width: 300px;
+    height: 500px;
+}
